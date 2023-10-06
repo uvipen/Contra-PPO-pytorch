@@ -32,7 +32,8 @@ def test(opt, global_model, num_states, num_actions):
         action = torch.argmax(policy).item()
 
         state, reward, done, info = env.step(action)
-        if (done and info["lives"] != 0) or info["level"] == opt.level:
+        # if (done and info["lives"] != 0) or info["level"] == opt.level:
+        if (done and info["lives"] != 0):
             torch.save(local_model.state_dict(), "{}/ppo_contra_success_{}".format(opt.saved_path, info["lives"]))
 
         env.render()
